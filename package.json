@@ -1,0 +1,26 @@
+{
+  "name": "",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc -w",
+    "start": "node ./out/index.js",
+    "format": "prettier --write src/",
+    "convert": "./bin/convert out/output.raw",
+    "test": "jest --detectOpenHandles --forceExit --coverage"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.14",
+    "@types/node": "^22.15.18",
+    "jest": "^29.7.0",
+    "prettier": "^3.5.3",
+    "ts-jest": "^29.3.4",
+    "typescript": "^5.8.3"
+  }
+}
