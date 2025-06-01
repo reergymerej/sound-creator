@@ -1,5 +1,6 @@
 import generate, { Tone } from './generate'
 import save from './save'
+import tones from './tones'
 
 type CreateResult = Buffer
 
@@ -15,26 +16,6 @@ const output = (result: CreateResult) => {
 }
 
 const main = () => {
-  const buffer = Buffer.alloc(0)
-
-  const tones: Tone[] = [
-    {
-      amplitude: 0.5,
-      duration: 0.125,
-      frequency: 440,
-    },
-    {
-      amplitude: 0.5,
-      duration: 0.25,
-      frequency: 880,
-    },
-    {
-      amplitude: 0.25,
-      duration: 0.25,
-      frequency: 880 * 2,
-    },
-  ]
-
   const result = create(tones)
   output(result)
 }
