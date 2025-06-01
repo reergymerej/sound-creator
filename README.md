@@ -1,6 +1,7 @@
 # sound creator
 
 ## requires
+sox
 
 ## dev
 npm run dev
