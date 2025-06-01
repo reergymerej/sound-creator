@@ -1,28 +1,47 @@
 import { Tone } from './generate'
 import save from './save'
+import { bpm, NOTE, NoteDurationKeys, noteDurations } from './constants'
+
+const getNoteDuration = (note: NoteDurationKeys, bpm: number): number => {
+  const noteDurationNumber = noteDurations[note]
+  const beatsPerMeasure = 4
+  const bps = bpm / 60 // beats per second
+  return (noteDurationNumber * beatsPerMeasure) / bps
+}
 
 const tones: Tone[] = []
 
-let frequency = 20 // 20Hz, lower limit of human hearing
-const max = 20000 // 20kHz, upper limit of human hearing
+const loops = 4
+for (let i = 0; i < loops; i++) {
+  let frequency = 200 // 20Hz, lower limit of human hearing
+  const max = 20000 // 20kHz, upper limit of human hearing
 
-const duration = 0.2
-
-while (frequency < max) {
-  console.log(frequency)
   tones.push({
-    amplitude: 0.25,
-    duration,
+    amplitude: 0.75,
+    duration: getNoteDuration(NOTE.EIGHTH, bpm),
     frequency,
   })
-  frequency *= 2
-}
 
-tones.push({
-  amplitude: 0.25,
-  duration,
-  frequency: max,
-})
+  tones.push({
+    // rest
+    amplitude: 0.0,
+    duration: getNoteDuration(NOTE.EIGHTH, bpm),
+    frequency,
+  })
+
+  tones.push({
+    amplitude: 0.75,
+    duration: getNoteDuration(NOTE.EIGHTH, bpm),
+    frequency: (frequency * 2) / 3,
+  })
+
+  tones.push({
+    // rest
+    amplitude: 0.0,
+    duration: getNoteDuration(NOTE.EIGHTH, bpm),
+    frequency,
+  })
+}
 
 const savePath = './out/tones.json'
 save(savePath, JSON.stringify(tones, null, 2))
