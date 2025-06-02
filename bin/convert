@@ -2,11 +2,14 @@
 
 # usage: ./convert <input_file> <sample_rate=16000>
 
+
 input_file=$1
 output_file="${input_file%.*}.wav"
 
-# get sample rate from from argv, default to 44100 Hz
-sample_rate=${2:-44100}
+# read .env
+export $(grep -v '^#' .env | xargs)
+
+sample_rate=${2:-$SAMPLE_RATE}
 
 echo "Converting $input_file to $output_file ($sample_rate Hz)"
 sox -t raw -r $sample_rate -b 16 -c 1 -L -e signed-integer $input_file $output_file
